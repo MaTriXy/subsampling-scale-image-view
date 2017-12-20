@@ -1,6 +1,8 @@
 Subsampling Scale Image View
 ===========================
 
+[![Build Status](https://travis-ci.org/davemorrissey/subsampling-scale-image-view.svg?branch=master)](https://travis-ci.org/davemorrissey/subsampling-scale-image-view)
+
 A custom image view for Android, designed for photo galleries and displaying huge images (e.g. maps and building plans) without `OutOfMemoryError`s. Includes pinch to zoom, panning, rotation and animation support, and allows easy extension so you can add your own overlays and touch event detection.
 
 The view optionally uses subsampling and tiles to support very large images - a low resolution base layer is loaded and as you zoom in, it is overlaid with smaller high resolution tiles for the visible area. This avoids holding too much data in memory. It's ideal for displaying large images while allowing you to zoom in to the high resolution details. You can disable tiling for smaller images and when displaying a bitmap object. There are some advantages and disadvantages to disabling tiling so to decide which is best, see [the wiki](https://github.com/davemorrissey/subsampling-scale-image-view/wiki/02.-Displaying-images).
@@ -16,14 +18,21 @@ The view optionally uses subsampling and tiles to support very large images - a 
 * [Event handling](https://github.com/davemorrissey/subsampling-scale-image-view/wiki/09.-Events)
 * [Animation](https://github.com/davemorrissey/subsampling-scale-image-view/wiki/08.-Animation)
 * [Extension](https://github.com/davemorrissey/subsampling-scale-image-view/wiki/10.-Extension)
+* [Reference (JavaDocs)](http://davemorrissey.github.io/subsampling-scale-image-view/javadoc/)
 
-#### 2.x.x to 3.x.x migration
+#### Migration guides
 
-Version 3.x.x includes breaking changes. Please view the [migration guide](https://github.com/davemorrissey/subsampling-scale-image-view/wiki/X.--2.x.x-to-3.x.x-migration).
+Versions 3.9.0, 3.8.0 and 3.0.0 contain breaking changes. Migration instructions can be found [in the wiki](https://github.com/davemorrissey/subsampling-scale-image-view/wiki/X.--Migration-guides).
 
 #### Download the sample app
 
-[![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.davemorrissey.labs.subscaleview.sample)
+[![Get it on Google Play](docs/images/google_play.png)](https://play.google.com/store/apps/details?id=com.davemorrissey.labs.subscaleview.sample)
+
+[Kotlin Sample App on GitHub](https://github.com/davemorrissey/ssiv-kotlin-sample)
+
+#### Demo
+
+![Demo](docs/images/demo.gif)
 
 ## Features
 
@@ -73,7 +82,7 @@ Version 3.x.x includes breaking changes. Please view the [migration guide](https
 
 ## Quick start
 
-**1)** Add `com.davemorrissey.labs:subsampling-scale-image-view:3.6.0` as a dependency in your build.gradle file.
+**1)** Add `com.davemorrissey.labs:subsampling-scale-image-view:3.9.0` as a dependency in your build.gradle file.
 
 **2)** Add the view to your layout XML.
 
@@ -102,6 +111,11 @@ Version 3.x.x includes breaking changes. Please view the [migration guide](https
     SubsamplingScaleImageView imageView = (SubsamplingScaleImageView)findViewById(id.imageView);
     imageView.setImage(ImageSource.bitmap(bitmap));
 
+## Photo credits
+
+* San Martino by Luca Bravo, via [unsplash.com](https://unsplash.com/photos/lWAOc0UuJ-A)
+* Swiss Road by Ludovic Fremondiere, via [unsplash.com](https://unsplash.com/photos/3XN-BNRDUyY)
+
 ## About
 
-Copyright 2016 David Morrissey, and licensed under the Apache License, Version 2.0. No attribution is necessary but it's very much appreciated. Star this project if you like it!
+Copyright 2017 David Morrissey, and licensed under the Apache License, Version 2.0. No attribution is necessary but it's very much appreciated. Star this project if you like it!
