@@ -1,7 +1,7 @@
 package com.davemorrissey.labs.subscaleview.decoder;
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -35,6 +35,7 @@ public class CompatDecoderFactory<T> implements DecoderFactory<T> {
     }
 
     @Override
+    @NonNull
     public T make() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         if (bitmapConfig == null) {
             return clazz.newInstance();

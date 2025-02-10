@@ -8,7 +8,9 @@ import android.content.res.Resources;
 import android.graphics.*;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -48,7 +50,7 @@ public class SkiaImageRegionDecoder implements ImageRegionDecoder {
     }
 
     @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
-    public SkiaImageRegionDecoder(Bitmap.Config bitmapConfig) {
+    public SkiaImageRegionDecoder(@Nullable Bitmap.Config bitmapConfig) {
         Bitmap.Config globalBitmapConfig = SubsamplingScaleImageView.getPreferredBitmapConfig();
         if (bitmapConfig != null) {
             this.bitmapConfig = bitmapConfig;
@@ -60,7 +62,8 @@ public class SkiaImageRegionDecoder implements ImageRegionDecoder {
     }
 
     @Override
-    public Point init(Context context, Uri uri) throws Exception {
+    @NonNull
+    public Point init(Context context, @NonNull Uri uri) throws Exception {
         String uriString = uri.toString();
         if (uriString.startsWith(RESOURCE_PREFIX)) {
             Resources res;
@@ -96,6 +99,9 @@ public class SkiaImageRegionDecoder implements ImageRegionDecoder {
             try {
                 ContentResolver contentResolver = context.getContentResolver();
                 inputStream = contentResolver.openInputStream(uri);
+                if (inputStream == null) {
+                    throw new Exception("Content resolver returned null stream. Unable to initialise with uri.");
+                }
                 decoder = BitmapRegionDecoder.newInstance(inputStream, false);
             } finally {
                 if (inputStream != null) {
@@ -107,7 +113,8 @@ public class SkiaImageRegionDecoder implements ImageRegionDecoder {
     }
 
     @Override
-    public Bitmap decodeRegion(Rect sRect, int sampleSize) {
+    @NonNull
+    public Bitmap decodeRegion(@NonNull Rect sRect, int sampleSize) {
         getDecodeLock().lock();
         try {
             if (decoder != null && !decoder.isRecycled()) {
